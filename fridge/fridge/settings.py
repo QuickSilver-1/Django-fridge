@@ -56,7 +56,7 @@ ROOT_URLCONF = 'fridge.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -119,4 +119,42 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
+STATIC_ROOT = 'static/'
+
+LOGIN_REDIRECT_URL = '/'
+"""
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+"""
+"""
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'mail@tradinghelper.online'
+
+EMAIL_HOST = 'mail.tradinghelper.online'
+EMAIL_HOST_USER = 'mail@tradinghelper.online'
+EMAIL_HOST_PASSWORD = 'uD1nG8eW2p'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = False
+"""
+"""
+DEFAULT_FROM_EMAIL = 'django-fridge@rambler.ru'
+
+EMAIL_HOST = 'smtp.rambler.ru'
+EMAIL_HOST_USER = 'django-fridge@rambler.ru'
+EMAIL_HOST_PASSWORD = 'jyx!h_h7466-zG5'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+"""
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+DEFAULT_FROM_EMAIL = 'mail@tradinghelper.ru'
+
+EMAIL_HOST = 'mail.tradinghelper.ru'
+EMAIL_HOST_USER = 'mail@tradinghelper.ru'
+EMAIL_HOST_PASSWORD = 'oG4iK4cN8a'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
