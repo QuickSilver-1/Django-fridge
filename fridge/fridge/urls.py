@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin, auth
 from django.urls import path, include
+from receipt_scanner.views import my_view, my_view_1
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user/', include('django.contrib.auth.urls'))
+    path('user/', include('django.contrib.auth.urls')),
+    path('receipt_scanner/', my_view),
+    path('qr_scanner/', my_view_1)
+    
+
 ]
