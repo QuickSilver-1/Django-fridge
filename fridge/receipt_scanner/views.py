@@ -1,8 +1,10 @@
 from django.shortcuts import render
 
 # Create your views here.
-import cv2
 import qr_parser
+import requests
+from bs4 import BeautifulSoup
+import json
 
 """
 filename = 'qr_parser/test_files/photo_2023-02-06_19-03-40.jpg'
@@ -37,10 +39,14 @@ def my_view(request):
     fp = request.GET.get("fp")
 
     result = qr_parser.parse_data_1(fn, i, fp)
-    items = []
+    soup = BeautifulSoup(result, "html.parser")
+    json_result = requests.get(soup.find("a", "msohide")["href"], headers={'Content-type': 'application/json'})
+    json_result = json.loads(json_result.text)
+    print(json_result)
     #for item in result:
 
 
     return render(request, 'receipt_scanner.html', {
-        'foo': result
+        'foo': result, 
+        'json': json_result,
     })
