@@ -42,7 +42,6 @@ def my_view(request):
     soup = BeautifulSoup(result, "html.parser")
     json_result = requests.get(soup.find("a", "msohide")["href"], headers={'Content-type': 'application/json'})
     json_result = json.loads(json_result.text)
-    print(json_result)
     #for item in result:
 
 
