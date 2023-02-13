@@ -17,7 +17,7 @@ class Product(models.Model):
     name = models.CharField(max_length=50)
     amount = models.SmallIntegerField()
     date_purchase = models.DateField(auto_now_add=True)
-    type = models.ForeignKey('Type', on_delete=models.PROTECT)
+    types = models.ForeignKey('Type', on_delete=models.PROTECT)
     user = models.ForeignKey('User', on_delete=models.PROTECT)
     Spoil = models.DateTimeField()
 
