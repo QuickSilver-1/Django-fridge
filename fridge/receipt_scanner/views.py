@@ -1,6 +1,5 @@
 from django.shortcuts import render
-
-# Create your views here.
+from receipt_scanner.models import Product
 import qr_parser
 import requests
 from bs4 import BeautifulSoup
@@ -42,10 +41,12 @@ def my_view(request):
     soup = BeautifulSoup(result, "html.parser")
     json_result = requests.get(soup.find("a", "msohide")["href"], headers={'Content-type': 'application/json'})
     json_result = json.loads(json_result.text)
+    for i in json_result['Document']['Items']:
+        entry = Product(name=i['Name'], amount=i['Quantity'])
+        entry.save()
     #for item in result:
 
 
     return render(request, 'receipt_scanner.html', {
         'foo': result, 
-        'json': json_result,
     })
