@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-<<<<<<< Updated upstream
-=======
 """
 class User(models.Model):
     first_name = models.CharField(max_length=50)
