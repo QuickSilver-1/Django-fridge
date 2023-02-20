@@ -1,10 +1,15 @@
 from django.shortcuts import render
+<<<<<<< Updated upstream
 from receipt_scanner.models import Product
+=======
+from product_list.models import Product
+# Create your views here.
+>>>>>>> Stashed changes
 import qr_parser
 import requests
 from bs4 import BeautifulSoup
 import json
-
+import chestniy_znak
 """
 filename = 'qr_parser/test_files/photo_2023-02-06_19-03-40.jpg'
 image = cv2.imread(filename)
@@ -41,12 +46,37 @@ def my_view(request):
     soup = BeautifulSoup(result, "html.parser")
     json_result = requests.get(soup.find("a", "msohide")["href"], headers={'Content-type': 'application/json'})
     json_result = json.loads(json_result.text)
+<<<<<<< Updated upstream
     for i in json_result['Document']['Items']:
         entry = Product(name=i['Name'], amount=i['Quantity'])
         entry.save()
     #for item in result:
+=======
+    json_items = json_result['Document']['Items']
+    items = []
+    for item in json_items:
+        product = {
+            "name": item["Name"],
+            "price": item["Price"],
+            "quantity": item["Quantity"],
+            "total_price": item["Total"]
+        }
+        if item["ProductCode"]:
+            if item["ProductCode"]['Code_GS_1M']:
+                lib = chestniy_znak.Lib()
+                data = lib.infoFromDataMatrix(item["ProductCode"]['Code_GS_1M'])
+                product["attribute"] = data
+>>>>>>> Stashed changes
 
+        items.append(product)
+    for item in items:
+        Product.objects.create(name=item["name"], user=request.user)
 
     return render(request, 'receipt_scanner.html', {
         'foo': result, 
+<<<<<<< Updated upstream
+=======
+        'json': json_items,
+        'items' : items
+>>>>>>> Stashed changes
     })
