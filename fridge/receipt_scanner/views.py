@@ -6,6 +6,13 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import chestniy_znak
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+from django.contrib.auth.views import LoginView
+from django.shortcuts import redirect
+
+
 """
 filename = 'qr_parser/test_files/photo_2023-02-06_19-03-40.jpg'
 image = cv2.imread(filename)
@@ -16,6 +23,7 @@ print(qr)
 result = qr_parser.parse_data(qr)
 print(result)
 """
+
 def my_view_1(request):
 
     return render(request, 'qr_scanner.html')
@@ -75,3 +83,18 @@ def my_view(request):
         'json': json_items,
         'items' : items
     })
+
+def redirect_to_user(request):
+    if request.user.is_authenticated:
+        return redirect('qr_scanner')
+    else:
+        return redirect('register')
+
+class RegisterUser(CreateView):
+    form_class = UserCreationForm
+    template_name = 'registration/register_user.html'
+    success_url = reverse_lazy('login')
+
+class LoginView1(LoginView):
+    def get_success_url(self):
+        return reverse_lazy('qr_scanner')
