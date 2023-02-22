@@ -1,1 +1,1 @@
-# jango-firdge
+# Django-fridge
