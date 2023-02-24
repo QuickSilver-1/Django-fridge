@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 """
+Поле User в таком виде не нужно, т.к есть дефолтный объект 
 class User(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -15,6 +16,7 @@ class User(models.Model):
     def __str__(self):
         return self.name
 
+Product перенесен, стоит расширить
 class Product(models.Model):
     name = models.CharField(max_length=200)
     amount = models.SmallIntegerField()
@@ -26,6 +28,7 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+Стоит взять уже готовый стандарт типов для продуктов
 class Type(models.Model):
     name = models.CharField(max_length=100)
     Expiration_date = models.SmallIntegerField()
@@ -34,10 +37,23 @@ class Type(models.Model):
         return self.name
 """
 
-from django.contrib.auth.models import User
+class List(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=500)
+    #user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=True)
+
+class ListAccess(models.Model):
+    list_id = models.ForeignKey(List, on_delete=models.CASCADE, null=False, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=True)
+
 class Product(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=500)   
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    list_id = models.ForeignKey(List, on_delete=models.CASCADE, null=False, blank=True)
 
     def __str__(self):
         return self.name
+
+class FridgeProduct(models.Model):
+    name = models.CharField(max_length=500)   
+    user_id = models.IntegerField(null=True, blank=True)

@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from product_list.models import Product
+from product_list.models import FridgeProduct
+from user.models import Profile
 # Create your views here.
 import qr_parser
 import requests
@@ -74,9 +75,12 @@ def my_view(request):
 
 
         items.append(product)
-        
+    
+    fridge_id = Profile.objects.get(user=request.user).fridge_id()
+
     for item in items:
-        Product.objects.create(name=item["name"], user=request.user)
+        FridgeProduct.objects.create(name=item["name"], user_id=fridge_id)
+
 
     return render(request, 'receipt_scanner.html', {
         'foo': result, 

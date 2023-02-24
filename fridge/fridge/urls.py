@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin, auth
 from django.urls import path, include
 from receipt_scanner.views import *
-from product_list.views import show_list
+from product_list.views import show_list, show_FridgeProduct
 
 
 urlpatterns = [
@@ -27,5 +27,6 @@ urlpatterns = [
     path('receipt_scanner/', my_view),
     path('qr_scanner/', my_view_1, name='qr_scanner'),
     path('product_list/', show_list),
+    path('fridge/', show_FridgeProduct),
     path('user/register/', RegisterUser.as_view(), name='register'),
 ]
