@@ -28,6 +28,8 @@ urlpatterns = [
     path('qr_scanner/', my_view_1, name='qr_scanner'),
     path('product_list/', show_list),
     path('fridge/', show_FridgeProduct),
-    path('user/register1/', RegisterUser1.as_view(), name='register'),
+    path('user/register/', RegisterUser1.as_view(), name='register'),
     path('user/register2/', RegisterUser2.as_view(), name='register2'),
+    path('user/autorisation/', autorisation, name='autorisation'),
+    path('user/hello', hello, name='hello'),
 ]

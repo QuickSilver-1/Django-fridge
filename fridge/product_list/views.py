@@ -110,18 +110,16 @@ def redirect_to_user(request):
     if request.user.is_authenticated:
         return redirect('qr_scanner')
     else:
-        return redirect('register')
+        return redirect('autorisation')
 
 
 class RegisterUser1(CreateView):
+    extra_context = {'n': 1, 'button': 'Далее', 'back': 'autorisation'}
     form_class = RegisterForm1
     template_name = 'registration/register_user.html'
 
     def form_valid(self, form):
         form.save()
-        username = self.request.POST['username']
-        password = self.request.POST['password1']
-        #authenticate user then login
         user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'],)
         login(self.request, user)
         return HttpResponseRedirect(reverse('register2'))
@@ -130,6 +128,7 @@ class RegisterUser1(CreateView):
         return reverse_lazy('register2')
 
 class RegisterUser2(CreateView):
+    extra_context = {'n': 2, 'button': 'Зарегестрироваться', 'back': 'register'}
     form_class = RegisterForm2
     template_name = 'registration/register_user.html'
     
@@ -140,7 +139,10 @@ class RegisterUser2(CreateView):
         post.email = form.data['email']
 
         post.save()
-        return HttpResponseRedirect(reverse_lazy('qr_scanner'))
+        return HttpResponseRedirect(reverse_lazy('hello'))
+    
+def autorisation(request):
+    return render(request, 'registration/autorisation.html')
 
-    def get_success_url(self) -> str:
-        return reverse_lazy('qr_scanner')
+def hello(request):
+    return render(request, 'registration/hello.html')

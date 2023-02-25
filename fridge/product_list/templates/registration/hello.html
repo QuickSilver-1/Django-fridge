@@ -1,0 +1,23 @@
+{% extends "product_list/base_generic.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row back"></div>
+<div><h1>Привет, {{user.first_name}}</h1></div>
+<div><h3><p>Добро пожаловать в приложение «Мой холодильник»</p>
+    <p>Ваш аккаунт активирован. Теперь Вы можете использовать сервис для контроля продуктов дома</p>
+</div>
+
+
+<footer class="auth_buttons fixed-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-xl-4 offset-xl-4"><form action="/qr_scanner"><button class="btn col-12 reg-but"><h3>Далее</h3></button></form></div>
+        </div>
+    </div>
+</footer>
+</form>
+</div>
+</div>
+
+{% endblock %}
