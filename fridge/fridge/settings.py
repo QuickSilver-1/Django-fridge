@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'product_list.apps.ProductListConfig',
-    'user.apps.UserConfig',
-    'receipt_scanner.apps.ReceiptScannerConfig'
 ]
 
 MIDDLEWARE = [

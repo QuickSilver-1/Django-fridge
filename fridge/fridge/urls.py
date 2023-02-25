@@ -15,8 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin, auth
 from django.urls import path, include
-from receipt_scanner.views import *
-from product_list.views import show_list, show_FridgeProduct
+from product_list.views import *
 from django.contrib.auth.views import LoginView
 
 

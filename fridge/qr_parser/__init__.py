@@ -1,1 +1,0 @@
-from qr_parser.main import *
