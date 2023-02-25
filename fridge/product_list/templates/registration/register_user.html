@@ -1,15 +1,29 @@
 {% extends "product_list/base_generic.html" %}
 
 {% block content %}
-<h1>Регистрация</h1>
+<div class="container">
+<div class="row">
+    <div class="offset-xl-4 col-xl-4 text-center">
+        <h1>Регистрация</h1>
+    </div>
+</div>
 
 <form method="post">
     {% csrf_token %}
     {% for i in form %}
-    <p><label class="form-label" for="{{ i.id_for_label }}">{{i.label}}</label><br>{{i}}</p>
-    <div class="form_error">{{i.errors}}</div>
+    <div class="row">
+        <div class="offset-xl-4 col-xl-4">
+            <p><label class="form-label" for="{{ i.id_for_label }}">{{i.label}}</label><br>{{i}}</p>
+        </div>
+        <div class="form_error offset-xxl-4 col-xxl-4 col-xs-12">{{i.errors}}</div>
+    </div>
     {% endfor %}
-    <button type="submit">Регистрация</button>
+    <div class="row">
+        <div class="col-xl-2 offset-xl-5">
+            <button type="submit">Регистрация</button>
+        </div>
+    </div>
 </form>
+</div>
 
 {% endblock %}

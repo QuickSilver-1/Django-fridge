@@ -1,13 +1,16 @@
 from .models import Product, ListAccess, List, FridgeProduct, Profile
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 import requests
 from bs4 import BeautifulSoup
 import json
 import chestniy_znak
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView
 from .forms import *
 from .qr_scanner import *
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def show_list(request):
@@ -27,8 +30,6 @@ def show_list(request):
 def show_FridgeProduct(request):
     fridge_id = Profile.objects.get(user=request.user).fridge_id()
     products = FridgeProduct.objects.filter(user_id=fridge_id)
-    for i in products:
-        print(products)
     return render(request, 'product_list/show_FridgeProduct.html', {"products": products})
 
 """
@@ -111,7 +112,35 @@ def redirect_to_user(request):
     else:
         return redirect('register')
 
-class RegisterUser(CreateView):
-    form_class = RegisterForm
+
+class RegisterUser1(CreateView):
+    form_class = RegisterForm1
     template_name = 'registration/register_user.html'
-    success_url = reverse_lazy('login')
+
+    def form_valid(self, form):
+        form.save()
+        username = self.request.POST['username']
+        password = self.request.POST['password1']
+        #authenticate user then login
+        user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'],)
+        login(self.request, user)
+        return HttpResponseRedirect(reverse('register2'))
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('register2')
+
+class RegisterUser2(CreateView):
+    form_class = RegisterForm2
+    template_name = 'registration/register_user.html'
+    
+    def form_valid(self, form):
+        post = User.objects.get(username=self.request.user)
+        post.first_name = form.data['first_name']
+        post.last_name = form.data['last_name']
+        post.email = form.data['email']
+
+        post.save()
+        return HttpResponseRedirect(reverse_lazy('qr_scanner'))
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('qr_scanner')
