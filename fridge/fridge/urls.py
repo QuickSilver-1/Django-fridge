@@ -17,12 +17,13 @@ from django.contrib import admin, auth
 from django.urls import path, include
 from receipt_scanner.views import *
 from product_list.views import show_list, show_FridgeProduct
+from django.contrib.auth.views import LoginView
 
 
 urlpatterns = [
     path('', redirect_to_user),
     path('admin/', admin.site.urls),
-    path('user/login/', LoginView1.as_view(), name='login'),
+    path('user/login/', LoginView.as_view(), name='login'),
     path('user/', include('django.contrib.auth.urls')),
     path('receipt_scanner/', my_view),
     path('qr_scanner/', my_view_1, name='qr_scanner'),

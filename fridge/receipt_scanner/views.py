@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from product_list.models import FridgeProduct
 from user.models import Profile
 # Create your views here.
@@ -7,11 +7,9 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import chestniy_znak
-from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from django.contrib.auth.views import LoginView
-from django.shortcuts import redirect
+from receipt_scanner.forms import *
 
 
 """
@@ -95,10 +93,7 @@ def redirect_to_user(request):
         return redirect('register')
 
 class RegisterUser(CreateView):
-    form_class = UserCreationForm
+    form_class = RegisterForm
     template_name = 'registration/register_user.html'
     success_url = reverse_lazy('login')
 
-class LoginView1(LoginView):
-    def get_success_url(self):
-        return reverse_lazy('qr_scanner')
