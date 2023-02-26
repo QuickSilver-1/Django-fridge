@@ -1,18 +1,22 @@
-{% extends "registration/base_register.html" %}
-
+{% extends "product_list/base_generic.html" %}
 {% load static %}
-{% block header %}
+
+{% block content %}
+
 <div class="container">
     <div class="row">
         <div class="col-5 offset-xl-4 col-xl-2 back"><form action="../{{ back }}"><button class="btn col-xl-12 back-but"><h3 class="back-word"><img src="{% static 'product_list/images/Vector.svg' %}"></img> назад</h3></button></form></div>
-        </div>
+    </div>
+</div>
+
+<div class="container">
     <div class="row">
         <div class="col-xs-6 col-xl-4 offset-xl-4">
-            <h1>Шаг {{n}} из 2</h1>
+            <h1 class="name">{{ title }}</h1>
         </div>
     </div>
 </div>
 
-
+{% block middle %}{% endblock %}
 
 {% endblock %}

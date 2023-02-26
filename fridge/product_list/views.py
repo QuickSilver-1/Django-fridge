@@ -10,6 +10,7 @@ from django.views.generic import CreateView
 from .forms import *
 from .qr_scanner import *
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
 
 # Create your views here.
@@ -30,7 +31,7 @@ def show_list(request):
 def show_FridgeProduct(request):
     fridge_id = Profile.objects.get(user=request.user).fridge_id()
     products = FridgeProduct.objects.filter(user_id=fridge_id)
-    return render(request, 'product_list/show_FridgeProduct.html', {"products": products})
+    return render(request, 'product_list/show_FridgeProduct.html', {"products": products, 'title': 'Мой холодильник'})
 
 """
 filename = 'qr_parser/test_files/photo_2023-02-06_19-03-40.jpg'
@@ -98,23 +99,26 @@ def my_view(request):
 
     for item in items:
         FridgeProduct.objects.create(name=item["name"], user_id=fridge_id)
+    return redirect('fridge')
 
-
+"""
     return render(request, 'product_list/receipt_scanner.html', {
         'foo': result, 
         'json': json_items,
         'items' : items
     })
+"""
+
 
 def redirect_to_user(request):
     if request.user.is_authenticated:
-        return redirect('qr_scanner')
+        return redirect('my_product')
     else:
-        return redirect('autorisation')
+        return redirect('authorisation')
 
 
 class RegisterUser1(CreateView):
-    extra_context = {'n': 1, 'button': 'Далее', 'back': 'autorisation'}
+    extra_context = {'n': 1, 'back': 'authorisation'}
     form_class = RegisterForm1
     template_name = 'registration/register_user.html'
 
@@ -128,21 +132,30 @@ class RegisterUser1(CreateView):
         return reverse_lazy('register2')
 
 class RegisterUser2(CreateView):
-    extra_context = {'n': 2, 'button': 'Зарегестрироваться', 'back': 'register'}
+    extra_context = {'n': 2, 'back': 'register'}
     form_class = RegisterForm2
     template_name = 'registration/register_user.html'
     
     def form_valid(self, form):
         post = User.objects.get(username=self.request.user)
-        post.first_name = form.data['first_name']
-        post.last_name = form.data['last_name']
         post.email = form.data['email']
 
         post.save()
         return HttpResponseRedirect(reverse_lazy('hello'))
     
-def autorisation(request):
-    return render(request, 'registration/autorisation.html')
+def authorisation(request):
+    return render(request, 'registration/authorisation.html', {'title': 'Авторизация'})
 
 def hello(request):
-    return render(request, 'registration/hello.html')
+    return render(request, 'registration/hello.html', {'title': 'Приветсвенная страница'})
+
+def my_product(request):
+    return render(request, 'product_list/my_product.html', {'title': 'Мои продукты'})
+
+class LoginUser(LoginView):
+    form_class = LoginForm
+    template_name = 'registration/login.html'
+    extra_context = {'back': 'authorisation'}
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('my_product')

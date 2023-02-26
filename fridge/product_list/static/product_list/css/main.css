@@ -1,0 +1,13 @@
+.footer1 {
+    min-height: 65px;
+    border-top: 2px solid #999999;
+}
+
+footer img {
+    margin-top: 16px;
+    margin-bottom: 5px;
+}
+
+.name {
+    margin-top: 10px;
+}

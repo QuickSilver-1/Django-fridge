@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.utils.safestring import mark_safe
@@ -25,19 +25,23 @@ class RegisterForm2(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['first_name'].label = mark_safe('<h3>Введите своё имя</h3>')
-        self.fields['last_name'].label = mark_safe('<h3>Введите свою фамилию</h3>')
         self.fields['email'].label = mark_safe('<h3>Введите свой email</h3>')
 
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'register-form', 'placehodler':'Иван'})),
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'register-form', 'placehodler':'Иванов'})),
     email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'register-form', 'placehodler':'forexample@gmail.com'})),
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email')
+        fields = ('email',)
         labels = {
-            'first_name': 'Введите ваше имя',
-            'last_name': 'Введите вашу фамилию',
             'email': 'Введите адрес электронной почты',
         }
+
+class LoginForm(AuthenticationForm):
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].label = mark_safe('<h3>Имя пользователя</h3>')
+        self.fields['password'].label = mark_safe('<h3>Пароль</h3>')
+
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'login-field'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'login-field'}))

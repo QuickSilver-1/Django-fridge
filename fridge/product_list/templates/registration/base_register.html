@@ -1,0 +1,30 @@
+{% extends 'product_list/base_generic.html' %}
+
+{% block content %}
+
+{% block header %}{% endblock %}
+
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {% for i in form %}
+        <div class="row">
+            <div class="offset-xl-4 col-xl-4">
+                <label class="form-label col-12" for="{{ i.id_for_label }}">{{i.label}}</label>{{i}}
+            </div>
+            <div class="form_error offset-xxl-4 col-xxl-4 col-xs-12">{{i.errors}}</div>
+        </div>
+        {% endfor %}
+    </form>
+    <footer class="auth_buttons fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-xl-4 offset-xl-4"><form action="../../my_product"><button class="btn col-12 reg-but"><h3>Далее</h3></button></form></div>
+            </div>
+        </div>
+    </footer>
+</form>
+</div>
+</div>
+
+{% endblock %}

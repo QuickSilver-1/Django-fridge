@@ -1,0 +1,27 @@
+{% extends "product_list/base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% block header %}{% endblock %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-xl-4 offset-xl-4">
+            <h1 class="name">{{ title }}</h1>
+        </div>
+    </div>
+  </div>
+
+{% block middle %}{% endblock %}
+
+<div class="container fixed-bottom">
+    <footer class="footer1 main_btn">
+        <div class="row">
+            <div class="sub col-4 offset-2"><img class="mx-auto d-block" src="{% static 'product_list/images/basket-checked.svg' %}" alt="-" width="25px" height="25px"><p class="text-center">Мои продукты</p></div>
+            <div class="sub col-4"><img class="mx-auto d-block" src="{% static 'product_list/images/user.svg' %}" alt="-" width="25px" height="25px"><p class="text-center">Профиль</p></div>
+        </div>
+    </footer>
+</div>
+
+{% endblock %}

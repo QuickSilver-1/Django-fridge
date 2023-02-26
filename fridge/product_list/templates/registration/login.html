@@ -1,40 +1,18 @@
-{% extends "product_list/base_generic.html" %}
+{% extends "registration/base_register.html" %}
+{% load static %}
 
-{% block content %}
-
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
-
-{% if next %}
-  {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-  {% else %}
-    <p>Please login to see this page.</p>
-  {% endif %}
-{% endif %}
-
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
-
-<tr>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
-</tr>
-
-<tr>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
-</tr>
-</table>
-
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+{% block header %}
+<div class="container">
+  <div class="row">
+      <div class="col-5 offset-xl-4 col-xl-2 back"><form action="../{{ back }}"><button class="btn col-xl-12 back-but"><h3 class="back-word"><img src="{% static 'product_list/images/Vector.svg' %}"></img> назад</h3></button></form></div>
+      </div>
+  <div class="row">
+      <div class="col-xs-6 col-xl-4 offset-xl-4">
+          <h1>Авторизация</h1>
+      </div>
+  </div>
+</div>
+{% endblock %}
 
 {# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-
-{% endblock %}
+<p><a href="{% url 'password_reset' %}">Забыли пароль</a></p>

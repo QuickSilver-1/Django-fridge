@@ -16,20 +16,20 @@ Including another URLconf
 from django.contrib import admin, auth
 from django.urls import path, include
 from product_list.views import *
-from django.contrib.auth.views import LoginView
 
 
 urlpatterns = [
     path('', redirect_to_user),
     path('admin/', admin.site.urls),
-    path('user/login/', LoginView.as_view(), name='login'),
+    path('user/login/', LoginUser.as_view(), name='login'),
     path('user/', include('django.contrib.auth.urls')),
     path('receipt_scanner/', my_view),
     path('qr_scanner/', my_view_1, name='qr_scanner'),
     path('product_list/', show_list),
-    path('fridge/', show_FridgeProduct),
+    path('fridge/', show_FridgeProduct, name='fridge'),
     path('user/register/', RegisterUser1.as_view(), name='register'),
     path('user/register2/', RegisterUser2.as_view(), name='register2'),
-    path('user/autorisation/', autorisation, name='autorisation'),
-    path('user/hello', hello, name='hello'),
+    path('user/authorisation/', authorisation, name='authorisation'),
+    path('user/hello/', hello, name='hello'),
+    path('my_product/', my_product, name='my_product')
 ]
