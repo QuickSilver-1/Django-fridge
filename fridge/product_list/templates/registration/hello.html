@@ -3,10 +3,23 @@
 {% block header %}
 
 <div class="container">
-    <div class="row back"></div>
-<div><h1>Привет, {{user.username}}</h1></div>
-<div><h3><p>Добро пожаловать в приложение «Мой холодильник»</p>
-    <p>Ваш аккаунт активирован. Теперь Вы можете использовать сервис для контроля продуктов дома</p>
+    <div class="row back">
+        <h1><p>Привет, {{user.username}}</p></h1>
+        <h3><p>Добро пожаловать в приложение «Мой холодильник»</p>
+        <h3><p>Ваш аккаунт активирован. Теперь Вы можете использовать сервис для контроля продуктов дома</p></h3>
 </div>
 
 {% endblock %}
+
+{% block footer %}
+</form>
+<footer class="auth_buttons fixed-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-xl-4 offset-xl-4"><form action="../../my_product"><button class="btn col-12 reg-but"><h3>Далее</h3></button></form></div>
+        </div>111
+    </div>
+</footer>
+
+{% endblock %}
+</div>

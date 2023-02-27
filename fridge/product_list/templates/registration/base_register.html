@@ -15,15 +15,17 @@
             <div class="form_error offset-xxl-4 col-xxl-4 col-xs-12">{{i.errors}}</div>
         </div>
         {% endfor %}
-    </form>
+
+    {% block footer %}
     <footer class="auth_buttons fixed-bottom">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-xl-4 offset-xl-4"><form action="../../my_product"><button class="btn col-12 reg-but"><h3>Далее</h3></button></form></div>
+                <div class="col-xs-12 col-xl-4 offset-xl-4"><button class="btn col-12 reg-but"><h3>Далее</h3></button></div>
             </div>
         </div>
     </footer>
 </form>
+    {% endblock %}
 </div>
 </div>
 

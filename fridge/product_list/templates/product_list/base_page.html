@@ -11,17 +11,24 @@
             <h1 class="name">{{ title }}</h1>
         </div>
     </div>
-  </div>
-
+</div>
 {% block middle %}{% endblock %}
 
-<div class="container fixed-bottom">
-    <footer class="footer1 main_btn">
+<footer class="fixed-bottom footer1">
+    <div class="container">
         <div class="row">
-            <div class="sub col-4 offset-2"><img class="mx-auto d-block" src="{% static 'product_list/images/basket-checked.svg' %}" alt="-" width="25px" height="25px"><p class="text-center">Мои продукты</p></div>
+            {% if request.path == '/my_product/' %}
+            <div class="sub col-4 offset-2"><img class="mx-auto d-block" src="{% static 'product_list/images/basket-checked.svg' %}" alt="-" width="25px" height="25px"><p class="text-center"><strong>Мои продукты</strong></p></div>
+            {% else %}
+            <div class="sub col-4 offset-2"><img class="mx-auto d-block" src="{% static 'product_list/images/basket.svg' %}" alt="-" width="25px" height="25px"><p class="text-center">Мои продукты</p></div>
+            {% endif %}
+            {% if request.path == '/profile/' %}
+            <div class="sub col-4"><img class="mx-auto d-block" src="{% static 'product_list/images/user-checked.svg' %}" alt="-" width="25px" height="25px"><p class="text-center"><strong>Профиль</strong></p></div>
+            {% else %}
             <div class="sub col-4"><img class="mx-auto d-block" src="{% static 'product_list/images/user.svg' %}" alt="-" width="25px" height="25px"><p class="text-center">Профиль</p></div>
+            {% endif %}
         </div>
-    </footer>
-</div>
+    </div>
+</footer>
 
 {% endblock %}

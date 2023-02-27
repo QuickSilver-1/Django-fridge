@@ -150,7 +150,9 @@ def hello(request):
     return render(request, 'registration/hello.html', {'title': 'Приветсвенная страница'})
 
 def my_product(request):
-    return render(request, 'product_list/my_product.html', {'title': 'Мои продукты'})
+    fridge_id = Profile.objects.get(user=request.user).fridge_id()
+    products = FridgeProduct.objects.filter(user_id=fridge_id)
+    return render(request, 'product_list/my_product.html', {'title': 'Мои продукты', "products": products})
 
 class LoginUser(LoginView):
     form_class = LoginForm

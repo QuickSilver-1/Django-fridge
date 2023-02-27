@@ -14,5 +14,18 @@
 </div>
 {% endblock %}
 
+{% block footer %}
+
+<footer class="auth_buttons fixed-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-xl-4 offset-xl-4"><button type="submit" class="btn col-12 reg-but"><h3>Далее</h3></button></div>
+        </div>
+    </div>
+</footer>
+
+{% endblock %}
+
+</form>
 {# Assumes you setup the password_reset view in your URLconf #}
 <p><a href="{% url 'password_reset' %}">Забыли пароль</a></p>

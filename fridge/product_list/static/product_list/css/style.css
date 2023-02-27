@@ -55,7 +55,7 @@ h3{
     -webkit-border-radius: 5px;
     -o-border-radius: 5x;
     -ms-border-radius: 5px;
-    box-shadow: 0 1px 3px;
+    box-shadow: 0 1px 3px #BBB;
 }
 
 .back-word{
@@ -74,7 +74,7 @@ h3{
     -webkit-border-radius: 15px;
     -o-border-radius: 15x;
     -ms-border-radius: 15px;
-    box-shadow: 0 1px 3px;
+    box-shadow: 0 1px 3px #BBB;
 }
 
 input{
