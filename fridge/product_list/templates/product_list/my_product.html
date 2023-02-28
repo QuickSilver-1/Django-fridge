@@ -3,11 +3,13 @@
 {% block middle %}
 
 <div class="container">
+    <ul class="elastic">
 {% for product in products %}
-    <div class="row">
+    <li><div class="row">
         <div class="col-11 product1"><h3 class="product_p">{{ product.name }}</h3></div>
-    </div>
+    </div></li>
 {% endfor %}
 </div>
+</ul>
 {% endblock %}
 
