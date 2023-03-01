@@ -3,12 +3,14 @@
 {% block middle %}
 
 <div class="container">
+
+<a href="/qr_scanner/">QR код</a>
 {% for product in products %}
     <div class="row">
         <div class="col-11 product1"><h3 class="product_p">{{ product.name }}</h3></div>
     </div>
 {% endfor %}
 </div>
-<a href="/qr_scanner/">QR код</a>
+
 {% endblock %}
 
