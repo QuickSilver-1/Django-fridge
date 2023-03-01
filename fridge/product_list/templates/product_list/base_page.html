@@ -3,7 +3,13 @@
 
 {% block content %}
 
-{% block header %}{% endblock %}
+<div class="container">
+    <nav>
+        <form class="form-inline">
+          <input class="form-control col-11 search" id="elastic" type="search" placeholder="Поиск" aria-label="Search">
+        </form>
+    </nav>
+</div>
 
 <div class="container">
     <div class="row">
@@ -12,6 +18,7 @@
         </div>
     </div>
 </div>
+
 {% block middle %}{% endblock %}
 
 <footer class="fixed-bottom footer1">

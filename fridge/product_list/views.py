@@ -70,6 +70,7 @@ def my_view(request):
     soup = BeautifulSoup(result, "html.parser")
     json_result = requests.get(soup.find("a", "msohide")["href"], headers={'Content-type': 'application/json'})
     json_result = json.loads(json_result.text)
+    
     """
     for i in json_result['Document']['Items']:
         entry = Product(name=i['Name'], amount=i['Quantity'])
