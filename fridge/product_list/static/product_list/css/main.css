@@ -36,14 +36,15 @@
     border-radius: 20px;
     background-image: url(../images/serch_icon.svg);   
     background-repeat: no-repeat;
-    background-position: 4px; 
+    background-position: 7px; 
     outline: none;
     @font-face {
         font-family: SFProDisplay-Bold;
         src: url(fonts/SFProDisplay-Bold.ttf);
     }
     font-size: 16px;
-    padding-left: 30px;
+    padding-left: 40px;
+    height: 40px;
 }
 
 ul {
