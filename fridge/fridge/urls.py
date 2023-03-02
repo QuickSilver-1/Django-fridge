@@ -31,5 +31,8 @@ urlpatterns = [
     path('user/register2/', RegisterUser2.as_view(), name='register2'),
     path('user/authorisation/', authorisation, name='authorisation'),
     path('user/hello/', hello, name='hello'),
-    path('my_product/', my_product, name='my_product')
+    path('my_product/', my_product, name='my_product'),
+    path('methods/delete_FridgeProduct/<p_id>', Methods.delete_FridgeProduct),
+    path('my_lists/', my_lists),
+    
 ]

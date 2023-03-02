@@ -3,13 +3,15 @@
 {% block middle %}
 
 <div class="container">
-<<<<<<< HEAD
 
 <a href="/qr_scanner/">QR код</a>
     <ul class="elastic">
 {% for product in products %}
     <li><div class="row">
-        <div class="col-11 product1"><h3 class="product_p">{{ product.name }}</h3></div>
+        <div class="col-11 product1">
+            <h3 class="product_p">{{ product.name }}</h3> 
+            <a href="/methods/delete_FridgeProduct/{{ product.id }} ">Удалить</a>
+        </div>
     </div></li>
 {% endfor %}
 </div>

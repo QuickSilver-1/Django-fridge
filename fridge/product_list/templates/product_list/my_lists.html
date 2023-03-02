@@ -1,0 +1,13 @@
+{% extends 'product_list/base_page.html' %}
+
+{% block middle %}
+
+<div class="container">
+{% for name, products in lists.items %}
+    <h2>{{name}}</h2>
+    {% for product in products %}
+        <div>{{product.name}}</div>
+    {% endfor %}
+{% endfor %}
+{% endblock %}
+

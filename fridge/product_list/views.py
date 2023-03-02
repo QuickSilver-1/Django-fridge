@@ -20,11 +20,6 @@ def show_list(request):
     for lst_access in access:
         lst = List.objects.get(id=lst_access.id)
         products = Product.objects.filter(list_id=lst.id)
-        for p in products:
-            print(products)
-        print()
-        #lists.append()
-    print(Profile.objects.get(user=request.user).fridge_id())
 
     return render(request, 'product_list/show_list.html', {"lists": lists})
 
@@ -109,7 +104,28 @@ def my_view(request):
         'items' : items
     })
 """
+def get_fridge_id(request):
+    return Profile.objects.get(user=request.user).fridge_id()
 
+class Methods:
+    def delete_FridgeProduct(request, p_id):
+        user_id = get_fridge_id(request)
+        FridgeProduct.objects.filter(id=p_id,user_id=user_id).delete()
+        return redirect('my_product')
+
+
+def my_lists(request):
+    #user_id = get_fridge_id(request)
+    lists = ListAccess.objects.filter(user=request.user)
+    lsts = {}
+    for lst in lists:
+        name = lst.list_id.name
+        lsts[name] = []
+        products = Product.objects.filter(list_id=lst.list_id)
+        for product in products:
+            lsts[name].append(product)
+
+    return render(request, 'product_list/my_lists.html', {"lists": lsts})
 
 def redirect_to_user(request):
     if request.user.is_authenticated:
