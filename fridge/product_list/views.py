@@ -95,7 +95,7 @@ def my_view(request):
 
     for item in items:
         FridgeProduct.objects.create(name=item["name"], user_id=fridge_id)
-    return redirect('fridge')
+    return redirect('my_product')
 
 """
     return render(request, 'product_list/receipt_scanner.html', {
