@@ -20,9 +20,20 @@
 	        ++countResults;
 	        lastResult = decodedText;
 	        // Handle on success condition with the decoded message.
-	       	console.log(`Scan result ${decodedText}`, decodedResult);
-
-	        //window.location.href = '/receipt_scanner/?'+decodedText;
+	       	console.log(`${decodedText}`, decodedResult.result.format.formatName);
+	       	type = decodedResult.result.format.formatName;
+	       	if(type == "EAN_13"){
+	       		window.location.href = '/check_qr_info/?type='+type+"&number="+decodedText;
+	       	}
+	       	else if(type == "DATA_MATRIX"){
+	       		alert(decodedText);
+	       		window.location.href = '/check_qr_info/?type='+type+"&number="+decodedText;
+	       	}
+	       	/*else{
+	       		
+	       		
+	       	}*/
+	        //
 	    }
 	}
 

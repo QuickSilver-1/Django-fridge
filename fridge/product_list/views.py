@@ -47,6 +47,14 @@ def check_qr(request):
 
     return render(request, 'product_list/check_qr.html')
 
+def check_qr_info(request):
+    type_ = request.GET.get("type")
+    number = request.GET.get("number")
+    if type_ == "DATA_MATRIX":
+        number = number.split("↔")
+    res = number
+    return render(request, 'product_list/check_qr_info.html',  {"res": res})
+
 def my_view(request):
     
     # View code here...
