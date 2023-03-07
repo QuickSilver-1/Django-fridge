@@ -43,6 +43,10 @@ def my_view_1(request):
 
     return render(request, 'product_list/qr_scanner.html')
 
+def check_qr(request):
+
+    return render(request, 'product_list/check_qr.html')
+
 def my_view(request):
     
     # View code here...

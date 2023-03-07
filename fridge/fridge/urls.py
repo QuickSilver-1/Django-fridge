@@ -25,6 +25,7 @@ urlpatterns = [
     path('user/', include('django.contrib.auth.urls')),
     path('receipt_scanner/', my_view),
     path('qr_scanner/', my_view_1, name='qr_scanner'),
+    path('qr_scanner/', my_view_1, name='qr_scanner'),
     path('product_list/', show_list),
     path('fridge/', show_FridgeProduct, name='fridge'),
     path('user/register/', RegisterUser1.as_view(), name='register'),
